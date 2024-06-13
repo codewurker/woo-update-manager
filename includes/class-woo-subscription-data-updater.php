@@ -2,8 +2,10 @@
 /**
  * Updates the plugin details stored in transients used for auto-updates.
  *
- * @package Woo\Marketplace
+ * @package Automattic\WooUpdateManager
  */
+
+namespace Automattic\WooUpdateManager;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,6 +19,7 @@ class Woo_Subscription_Data_Updater {
 	 *
 	 * @return void
 	 */
+
 	public static function load() {
 		add_filter( 'update_woo_com_subscription_details', [ __CLASS__, 'update_plugin_package_url' ], 10, 3 );
 	}
@@ -53,8 +56,8 @@ class Woo_Subscription_Data_Updater {
 	 * @return bool True if active subscription found.
 	 */
 	public static function has_active_subscription( $product_id ) {
-		$auth          = WC_Helper_Options::get( 'auth' );
-		$subscriptions = WC_Helper::get_subscriptions();
+		$auth          = \WC_Helper_Options::get( 'auth' );
+		$subscriptions = \WC_Helper::get_subscriptions();
 
 		if ( empty( $auth['site_id'] ) || empty( $subscriptions ) ) {
 			return false;

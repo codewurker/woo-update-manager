@@ -11,10 +11,12 @@
  * Woo: 18734003407318:e4367d0e8d424278fd7049e7d7b567a6
  * Requires at least: 6.0
  * Requires PHP: 7.3
- * Version: 1.0.2
+ * Version: 1.0.3
  *
  * @package Woo\UpdateManager
  */
+
+namespace Automattic\WooUpdateManager;
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
 
@@ -35,21 +37,22 @@ function clear_update_transients() {
 /**
  * Register activation hook to clear update transients.
  */
-register_activation_hook( __FILE__, 'clear_update_transients' );
+register_activation_hook( __FILE__, __NAMESPACE__ . '\clear_update_transients' );
 
 /**
  * Register de-activation hook to clear update transients.
  */
-register_deactivation_hook( __FILE__, 'clear_update_transients' );
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\clear_update_transients' );
 
 
 /**
  * Declare compatibility for HPOS compatibility.
  */
-function declare_hpos_compatibility() {
+function declare_wc_feature_compatibility() {
 	if ( class_exists( FeaturesUtil::class ) ) {
 		FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
 	}
 }
 
-add_action( 'before_woocommerce_init', 'declare_hpos_compatibility' );
+add_action( 'before_woocommerce_init', __NAMESPACE__ . '\declare_wc_feature_compatibility' );

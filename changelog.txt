@@ -1,5 +1,9 @@
 *** WooCommerce.com Update Manager Changelog ***
 
+2024-06-10 - version 1.0.3
+* Update - Declare compatibility with WooCommerce cart_checkout_blocks feature.
+* Fix - Fix function name conflicts with other plugins.
+
 2024-04-12 - version 1.0.2
 * Update - Plugin name from Woo.com Update Manager to WooCommerce.com Update Manager.
 
